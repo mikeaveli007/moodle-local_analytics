@@ -56,3 +56,7 @@ $string['anonymizeip_desc'] = 'Google Universal Analytics: When present, the IP 
 $string['head'] = 'Header';
 $string['topofbody'] = 'Top of body';
 $string['footer'] = 'Footer';
+/*
+ * GDPR compliant
+ */
+$string['privacy:no_data_reason'] = "The local analytics plugin doesn't store any personal data.";

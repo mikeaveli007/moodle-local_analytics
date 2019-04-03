@@ -32,7 +32,6 @@
     Example context (json):
     { "siteid": UA-90210-15, "addition": 2, }
 }}
-
 <!-- Start Piwik Code -->
 {{#imagetrack}}
 <noscript>
@@ -41,9 +40,7 @@
 </p>
 </noscript>
 {{/imagetrack}}
-<!-- End Piwik Code -->
-
-{{#js}}
+<script type="text/javascript">
 var _paq = _paq || [];
 {{{doctitle}}}
 {{#userid}}
@@ -59,4 +56,5 @@ _paq.push(['enableHeartBeatTimer', 30]);
   var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
 g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
 })();
-{{/js}}
+</script>
+<!-- End Piwik Code -->

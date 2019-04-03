@@ -56,7 +56,7 @@ class piwik extends analytics {
             }
 
             if (self::should_track()) {
-                $OUTPUT->render_from_template('local_analytics/piwik', $template);
+                $CFG->additionalhtmlhead .= $OUTPUT->render_from_template('local_analytics/piwik', $template);
             }
         }
     }

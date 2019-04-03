@@ -39,7 +39,7 @@ class ganalytics extends analytics {
         $template->analyticsid = get_config('local_analytics', 'analyticsid');
         $cleanurl = get_config('local_analytics', 'cleanurl');
 
-        if (self::should_track()) {
+        if (self::should_track() && !empty($template->analyticsid)) {
             if ($cleanurl) {
                 $template->page = self::trackurl(true, true);
             }

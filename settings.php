@@ -60,6 +60,13 @@ if (is_siteadmin()) {
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $settings->add($setting);
 
+    $name = 'local_analytics/anonymizeip';
+    $title = get_string('anonymizeip', 'local_analytics');
+    $description = get_string('anonymizeip_desc', 'local_analytics');
+    $default = true;
+    $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
+    $settings->add($setting);
+
     $name = 'local_analytics/piwik';
     $title = get_string('piwik', 'local_analytics');
     $description = get_string('piwikdesc', 'local_analytics');

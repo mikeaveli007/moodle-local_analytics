@@ -50,6 +50,10 @@ class guniversal extends analytics {
             $template->addition = "'pageview'";
         }
 
+        if (get_config('local_analytics', 'anonymizeip')) {
+            $template->anonymizeip = true;
+        }
+
         if (self::should_track()) {
             $script = $OUTPUT->render_from_template('local_analytics/guniversal', $template);
         }

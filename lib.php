@@ -31,48 +31,10 @@ use local_analytics\injector;
 
 require_once(__DIR__.'/../../config.php');
 
-
 /**
- * Used since Moodle 29.
- */
-function local_analytics_extend_navigation() {
-    injector::inject();
-}
-
-/**
- * Used since Moodle 29.
- */
-function local_analytics_extend_settings_navigation() {
-    injector::inject();
-}
-
-/**
- * Used in Moodle 30+ when a user is logged on.
- */
-function local_analytics_extend_navigation_user_settings() {
-    injector::inject();
-}
-
-/**
- * Used in Moodle 30+ on the frontpage.
- */
-function local_analytics_extend_navigation_frontpage() {
-    injector::inject();
-}
-
-/**
- * Used in Moodle 31+ when a user is logged on.
- */
-function local_analytics_extend_navigation_user() {
-    injector::inject();
-}
-
-/**
- * Proposed in MDL-53978.
+ * Output callback, available since Moodle 3.3
  *
- * We are not using all callbacks provided there because the one below would cover all cases.
- * If approved, this would be the only needed callback, the others would provide legacy support.
  */
-function tool_callbacktest_before_http_headers() {
+function local_analytics_before_footer() {
     injector::inject();
 }

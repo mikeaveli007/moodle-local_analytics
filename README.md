@@ -35,7 +35,7 @@ Install instructions:
 3. Configure the plugin
 
 Configuration:
-The plugin currently supports 3 Analytics modes, Piwik, Google Universal Analytics and Google Legacy Analytics.
+The plugin currently supports 2 Analytics modes, Piwik and Google Universal Analytics.
 
 Piwik
 - Set the Site ID
@@ -46,13 +46,6 @@ Piwik
 	Piwik will aggregrate Page Titles and show a nice waterfall cascade of all sites, including categories and action types
 
 Google Universal Analytics
-- Plugin modifies the page speed sample to have 50% of your visitors samples for page speed instead of 1% making it much more useful
-- Set your Google tracking ID
-- Choose whether you want to track admins (not recommended)
-- Choose whether you want to send Clean URLs (not recommended):
-	Google analytics will no longer be able to use overlays and linking back to your Moodle site
-
-Google Legacy Analytics (soon deprecated by Google)
 - Plugin modifies the page speed sample to have 50% of your visitors samples for page speed instead of 1% making it much more useful
 - Set your Google tracking ID
 - Choose whether you want to track admins (not recommended)

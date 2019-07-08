@@ -46,13 +46,6 @@ if (is_siteadmin()) {
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $settings->add($setting);
 
-    $name = 'local_analytics/ganalytics';
-    $title = get_string('ganalytics', 'local_analytics');
-    $description = get_string('ganalyticsdesc', 'local_analytics');
-    $default = '0';
-    $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
-    $settings->add($setting);
-
     $name = 'local_analytics/analyticsid';
     $title = get_string('analyticsid', 'local_analytics');
     $description = get_string('analyticsid_desc', 'local_analytics');

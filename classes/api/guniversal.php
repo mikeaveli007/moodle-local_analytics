@@ -34,7 +34,7 @@ defined('MOODLE_INTERNAL') || die();
 
 class guniversal extends analytics {
     public static function insert_tracking() {
-        global $CFG, $PAGE, $OUTPUT;
+        global $PAGE, $OUTPUT;
 
         $template = new stdClass();
 
@@ -53,7 +53,9 @@ class guniversal extends analytics {
             $template->anonymizeip = true;
         }
         if (self::should_track() && !empty($template->analyticsid)) {
-            $script = $OUTPUT->render_from_template('local_analytics/guniversal', $template);
+            // The templates only contains a "{js}" block; so we don't care about
+            // the output; only that the $PAGE->requires are filled.
+            $OUTPUT->render_from_template('local_analytics/guniversal', $template);
         }
     }
 }

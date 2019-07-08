@@ -30,8 +30,6 @@ defined('MOODLE_INTERNAL') || die;
 
 use local_analytics\injector;
 
-require_once(__DIR__.'/../../config.php');
-
 /**
  * Output callback, available since Moodle 3.3
  *

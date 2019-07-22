@@ -3,6 +3,12 @@ moodle-local_analytics
 
 Release notes:
 
+version: 2019070800
+
+- Replace all injections by Moodle 3.3+'s `before_footer` callback
+
+It now depends on at least Moodle 3.3.
+
 version: 2018092400
 
 - Fixing unit test "provider_testcase" privacy/tests/provider_test.php

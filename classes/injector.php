@@ -51,7 +51,7 @@ class injector {
             return;
         }
 
-        $analyticstypes = array('guniversal', 'ganalytics', 'piwik');
+        $analyticstypes = array('guniversal', 'piwik');
         foreach ($analyticstypes as $type) {
             $enabled = get_config('local_analytics', $type);
             if ($enabled) {

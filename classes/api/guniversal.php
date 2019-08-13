@@ -38,6 +38,11 @@ defined('MOODLE_INTERNAL') || die();
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class guniversal extends analytics {
+    /**
+     * Insert the actual tracking code.
+     *
+     * @return void As the insertion is done through the {js} template API.
+     */
     public static function insert_tracking() {
         global $CFG, $PAGE, $OUTPUT;
 

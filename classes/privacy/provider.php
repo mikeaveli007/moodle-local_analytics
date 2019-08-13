@@ -26,6 +26,7 @@ namespace local_analytics\privacy;
 defined('MOODLE_INTERNAL') || die();
 
 /**
+ * Privacy Subsystem implementation for local_analytics.
  * @copyright  2018 Olivier SECRET <olivier.secret@catalyst-au.net>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */

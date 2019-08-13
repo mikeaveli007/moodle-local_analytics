@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Class injector
+ *
  * @package     local_analytics
  * @author      Daniel Thee Roperto <daniel.roperto@catalyst-au.net>
  * @copyright   2016 Catalyst IT Australia {@link http://www.catalyst-au.net}

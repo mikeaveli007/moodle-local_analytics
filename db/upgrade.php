@@ -25,6 +25,9 @@
  * @author     Bas Brands <bas@sonsbeekmedia.nl>, David Bezemer <info@davidbezemer.nl>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+defined('MOODLE_INTERNAL') || die;
+
 function xmldb_local_analytics_upgrade($oldversion) {
     global $DB;
 

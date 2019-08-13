@@ -34,6 +34,8 @@ use core\session\manager;
 
 /**
  * Abstract local analytics class.
+ * @copyright  Bas Brands, Sonsbeekmedia 2017
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 abstract class analytics {
     /**

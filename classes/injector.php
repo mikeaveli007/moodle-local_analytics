@@ -15,6 +15,8 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Class injector
+ *
  * @package     local_analytics
  * @author      Daniel Thee Roperto <daniel.roperto@catalyst-au.net>
  * @copyright   2016 Catalyst IT Australia {@link http://www.catalyst-au.net}
@@ -35,9 +37,14 @@ defined('MOODLE_INTERNAL') || die();
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class injector {
-    /** @var bool */
+    /** @var bool Keeps state for injection */
     private static $injected = false;
 
+    /**
+     * Do the actual analytics code injection.
+     *
+     * @return null
+     */
     public static function inject() {
         if (self::$injected) {
             return;
@@ -67,6 +74,11 @@ class injector {
         }
     }
 
+    /**
+     * Toggle the state back to un-injected.
+     *
+     * @return null
+     */
     public static function reset() {
         self::$injected = false;
     }

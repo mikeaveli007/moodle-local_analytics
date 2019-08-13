@@ -32,6 +32,11 @@ use stdClass;
 
 defined('MOODLE_INTERNAL') || die();
 
+/**
+ * Guniversal analytics class.
+ * @copyright  Bas Brands, Sonsbeekmedia 2017
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ */
 class guniversal extends analytics {
     public static function insert_tracking() {
         global $CFG, $PAGE, $OUTPUT;

@@ -34,6 +34,7 @@ defined('MOODLE_INTERNAL') || die();
  * @param int $oldversion
  * @return bool always true
  */
+
 function xmldb_local_analytics_upgrade($oldversion) {
     global $DB;
 

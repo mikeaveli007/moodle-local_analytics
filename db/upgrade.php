@@ -82,9 +82,7 @@ function xmldb_local_analytics_upgrade($oldversion) {
 
     if ($oldversion < 2019070801) {
         // Remove 'analytics' from the configuration table.
-        if ($analytics = $DB->get_record('config_plugins', array('plugin' => 'local_analytics', 'name' => 'analytics')) ) {
-            $DB->delete_record('config_plugins', $analytics);
-        }
+        $DB->delete_records('config_plugins', ['plugin' => 'local_analytics', 'name' => 'analytics']);
         upgrade_plugin_savepoint(true, 2019070801, 'local', 'analytics');
     }
 

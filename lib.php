@@ -37,3 +37,11 @@ use local_analytics\injector;
 function local_analytics_before_footer() {
     injector::inject();
 }
+
+/**
+ * Output callback, available since Moodle 3.3
+ *
+ */
+function local_analytics_before_http_headers() {
+    injector::inject();
+}

@@ -38,5 +38,6 @@
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
     ga('create', '{{analyticsid}}', {'siteSpeedSampleRate': 50});{{#anonymizeip}}
     ga('set', 'anonymizeIp', true);{{/anonymizeip}}
+    ga('set', 'userId', '{{userid}}');
     ga('send', {{{addition}}});
 {{/js}}

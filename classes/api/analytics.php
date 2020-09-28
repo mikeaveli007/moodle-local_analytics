@@ -61,7 +61,7 @@ abstract class analytics {
      * @return string A URL to use for tracking.
      */
     public static function trackurl($urlencode = false, $leadingslash = false) {
-        global $DB, $PAGE;
+        global $DB, $PAGE, $_REQUEST, $USER;
         $pageinfo = get_context_info_array($PAGE->context->id);
         $trackurl = "";
 
@@ -102,6 +102,35 @@ abstract class analytics {
             $trackurl .= self::might_encode($pageinfo[2]->modname, $urlencode);
             $trackurl .= '/';
             $trackurl .= self::might_encode($pageinfo[2]->name, $urlencode);
+        }
+
+        // If in the library add the entry category or name
+        if(isset($_REQUEST["eid"]) || isset($_REQUEST["mode"])) {
+            if(isset($_REQUEST["mode"]) && $_REQUEST["mode"] == "cat") { 
+                $category = get_entry_category($_REQUEST["hook"]);
+                $trackurl .= '/category/';
+                $trackurl .= self::might_encode($category->name, $urlencode);
+            }
+            if(isset($_REQUEST["eid"])) {
+                $entry = get_entry($_REQUEST["eid"]);
+                $trackurl .= '/entry/';
+                $trackurl .= self::might_encode($entry->concept, $urlencode);
+            }
+        }
+
+        // Add the user_id
+        if($USER->id > 0) {
+            $trackurl .= '?u=';
+            $trackurl .= self::might_encode($USER->id, $urlencode);
+        }
+
+        // If searching the library add the search params
+        if(isset($_REQUEST["hook"]) && isset($_REQUEST["mode"])) {
+            if($_REQUEST["mode"] == "search") { 
+                //$trackurl .= '/search/';
+                $trackurl .= (strpos($trackurl, "?") ? '&q=' : '?q=');
+                $trackurl .= self::might_encode($_REQUEST["hook"], $urlencode);
+            }
         }
 
         return $trackurl;

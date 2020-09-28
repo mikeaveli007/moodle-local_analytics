@@ -44,12 +44,13 @@ class guniversal extends analytics {
      * @return void As the insertion is done through the {js} template API.
      */
     public static function insert_tracking() {
-        global $PAGE, $OUTPUT;
+        global $PAGE, $OUTPUT, $USER;
 
         $template = new stdClass();
 
         $template->analyticsid = get_config('local_analytics', 'analyticsid');
         $cleanurl = get_config('local_analytics', 'cleanurl');
+        $template->userid = ($USER->id > 0 ? $USER->id : null);        
 
         if ($cleanurl) {
             $template->addition = "{'hitType' : 'pageview',

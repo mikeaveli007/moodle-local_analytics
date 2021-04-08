@@ -119,10 +119,10 @@ abstract class analytics {
         }
 
         // Add the user_id
-        if($USER->id > 0) {
-            $trackurl .= '?u=';
-            $trackurl .= self::might_encode($USER->id, $urlencode);
-        }
+        //if($USER->id > 0) {
+        //    $trackurl .= '?u=';
+        //    $trackurl .= self::might_encode($USER->id, $urlencode);
+        //}
 
         // If searching the library add the search params
         if(isset($_REQUEST["hook"]) && isset($_REQUEST["mode"])) {

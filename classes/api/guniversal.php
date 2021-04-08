@@ -49,8 +49,15 @@ class guniversal extends analytics {
         $template = new stdClass();
 
         $template->analyticsid = get_config('local_analytics', 'analyticsid');
+        $template->analyticsgtmid = get_config('local_analytics', 'analyticsgtmid');
+        $userid = $USER->id;
+
+        if($USER->id > 0) {
+            $template->userid = $userid;
+            $template->usersa = get_user_service_area($USER->id);
+        }
+        
         $cleanurl = get_config('local_analytics', 'cleanurl');
-        $template->userid = ($USER->id > 0 ? $USER->id : null);        
 
         if ($cleanurl) {
             $template->addition = "{'hitType' : 'pageview',

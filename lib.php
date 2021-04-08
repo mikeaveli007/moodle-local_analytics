@@ -57,3 +57,26 @@ function get_entry_category($id) {
     $cat = $DB->get_record('library_categories', ['id' => $id]);
     return $cat;
 }
+
+function get_user_cohort_name($id) {
+    global $DB;
+
+    return $DB->get_field_sql('SELECT c.name
+                    FROM {cohort} c
+                    JOIN {cohort_members} cm ON c.id = cm.cohortid
+                    WHERE cm.userid=? 
+                    AND c.name LIKE ?', array($id, "ochin-crowd-sa%"));    
+}
+
+function get_user_service_area($id) {
+    $cohort = get_user_cohort_name($id);
+    
+    $sa = $cohort != null ? explode("-", $cohort)[2]: null;
+    return $sa;
+}
+
+function consolelog($message) {
+    echo '<script>';
+    echo 'console.log('. json_encode($message, JSON_HEX_TAG) .')';
+    echo '</script>';
+}

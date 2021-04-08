@@ -53,6 +53,13 @@ if (is_siteadmin()) {
     $setting = new admin_setting_configtext($name, $title, $description, $default);
     $settings->add($setting);
 
+    $name = 'local_analytics/analyticsgtmid';
+    $title = get_string('analyticsgtmid', 'local_analytics');
+    $description = get_string('analyticsgtmid_desc', 'local_analytics');
+    $default = '';
+    $setting = new admin_setting_configtext($name, $title, $description, $default);
+    $settings->add($setting);
+
     $name = 'local_analytics/anonymizeip';
     $title = get_string('anonymizeip', 'local_analytics');
     $description = get_string('anonymizeip_desc', 'local_analytics');

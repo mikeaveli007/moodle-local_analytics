@@ -48,13 +48,13 @@ function local_analytics_before_http_headers() {
 
 function get_entry($id) {
     global $DB;
-    $entry = $DB->get_record('library_entries', ['id' => $id]);
+    $entry = $DB->get_record('glossary_entries', ['id' => $id]);
     return $entry;
 }
 
 function get_entry_category($id) {
     global $DB;
-    $cat = $DB->get_record('library_categories', ['id' => $id]);
+    $cat = $DB->get_record('glossary_categories', ['id' => $id]);
     return $cat;
 }
 

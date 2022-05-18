@@ -61,11 +61,24 @@ function get_entry_category($id) {
 function get_user_cohort_name($id) {
     global $DB;
 
+    // Lookup service area crowd group
+    $cohort = $DB->get_field_sql('SELECT c.name
+        FROM {cohort} c
+        JOIN {cohort_members} cm ON c.id = cm.cohortid
+        WHERE cm.userid=? 
+        AND c.name LIKE ?', array($id, "ochin-crowd-sa%")
+    );
+
+    // Return group if there is a service area crowd group
+    if($cohort) return $cohort;
+
+    // Otherwise check to see if there is a staff crowd group and return that
     return $DB->get_field_sql('SELECT c.name
-                    FROM {cohort} c
-                    JOIN {cohort_members} cm ON c.id = cm.cohortid
-                    WHERE cm.userid=? 
-                    AND c.name LIKE ?', array($id, "ochin-crowd-sa%"));    
+        FROM {cohort} c
+        JOIN {cohort_members} cm ON c.id = cm.cohortid
+        WHERE cm.userid=? 
+        AND c.name LIKE ?', array($id, "ochin-crowd-staff%")
+    );
 }
 
 function get_user_service_area($id) {
@@ -73,10 +86,4 @@ function get_user_service_area($id) {
     
     $sa = $cohort != null ? explode("-", $cohort)[2]: null;
     return $sa;
-}
-
-function consolelog($message) {
-    echo '<script>';
-    echo 'console.log('. json_encode($message, JSON_HEX_TAG) .')';
-    echo '</script>';
 }

@@ -54,21 +54,29 @@ class guniversal extends analytics {
 
         if($USER->id > 0) {
             $template->userid = $userid;
-            $template->usersa = get_user_service_area($USER->id);
+            $sa = get_user_service_area($USER->id);
+            $template->usersa = $sa;
+        }
+
+        if (get_config('local_analytics', 'anonymizeip')) {
+            $template->anonymizeip = true;
+            $anonymizeip = true;
+        } else {
+            $anonymizeip = false;
         }
         
         $cleanurl = get_config('local_analytics', 'cleanurl');
 
         if ($cleanurl) {
-            $template->addition = "{'hitType' : 'pageview',
-                'page' : '".self::trackurl(true, true)."',
-                'title' : '".addslashes(format_string($PAGE->heading))."'
+            $template->addition = "{
+                'page_path' : '".self::trackurl(true, true)."',
+                'page_title' : '".addslashes(format_string($PAGE->heading))."',
+                'SA' : '".$sa."',
+                'contentGroup1' : '".$sa."',
+                'anonymize_ip': .$anonymizeip.
                 }";
         } else {
             $template->addition = "'pageview'";
-        }
-        if (get_config('local_analytics', 'anonymizeip')) {
-            $template->anonymizeip = true;
         }
         if (self::should_track() && !empty($template->analyticsid)) {
             // The templates only contains a "{js}" block; so we don't care about

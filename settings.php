@@ -67,6 +67,13 @@ if (is_siteadmin()) {
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $settings->add($setting);
 
+    $name = 'local_analytics/trackuser';
+    $title = get_string('trackuser', 'local_analytics');
+    $description = get_string('trackuser_desc', 'local_analytics');
+    $default = false;
+    $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
+    $settings->add($setting);
+
     $name = 'local_analytics/piwik';
     $title = get_string('piwik', 'local_analytics');
     $description = get_string('piwikdesc', 'local_analytics');

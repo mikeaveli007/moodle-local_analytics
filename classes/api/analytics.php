@@ -63,6 +63,11 @@ abstract class analytics {
     public static function trackurl($urlencode = false, $leadingslash = false) {
         global $DB, $PAGE, $_REQUEST, $USER;
         $pageinfo = get_context_info_array($PAGE->context->id);
+
+        if($pageinfo[1] == null) {
+            return false;
+        }
+
         $trackurl = "";
 
         if ($leadingslash) {

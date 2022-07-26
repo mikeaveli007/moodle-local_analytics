@@ -52,23 +52,57 @@ class guniversal extends analytics {
         $template->analyticsgtmid = get_config('local_analytics', 'analyticsgtmid');
         $userid = $USER->id;
 
+        if(substr($template->analyticsid, 0, 1) == "G") {
+            $template->usega4 = true;
+            $template->useua = false;
+        }
+        else if (substr($template->analyticsid, 0, 1) == "U") {
+            $template->useua = true;
+            $template->usega4 = false;
+        }
+
         if($USER->id > 0) {
             $template->userid = $userid;
-            $template->usersa = get_user_service_area($USER->id);
+            $template->trackuser = get_config('local_analytics', 'trackuser');
+            $sa = get_user_service_area($USER->id);
+            $template->usersa = $sa;
+        }
+
+        if (get_config('local_analytics', 'anonymizeip')) {
+            $template->anonymizeip = true;
+            $anonymizeip = "true";
+        } else {
+            $anonymizeip = "false";
         }
         
         $cleanurl = get_config('local_analytics', 'cleanurl');
 
         if ($cleanurl) {
-            $template->addition = "{'hitType' : 'pageview',
-                'page' : '".self::trackurl(true, true)."',
-                'title' : '".addslashes(format_string($PAGE->heading))."'
-                }";
+            $trackurl = self::trackurl(true, true);
+            if($template->usega4) {
+                $template->ga4options = "{
+                    ".($trackurl ? "'page_path' : '".$trackurl."'," : '')."
+                    'page_title' : '".addslashes(format_string($PAGE->heading))."',
+                    'SA' : '".$sa."',
+                    'content_group' : '".$sa."',
+                    ".($template->trackuser ? "'user_id' : '".$template->userid."'," : '')."
+                    'anonymize_ip': ".$anonymizeip."
+                    }";
+            }
+            else if ($template->useua) {
+                if($trackurl) {
+                    $template->addition = "{'hitType' : 'pageview',
+                        'page' : '".self::trackurl(true, true)."',
+                        'title' : '".addslashes(format_string($PAGE->heading))."'
+                        }";
+                } else {
+                    $template->addition = "{'hitType' : 'pageview',
+                        'title' : '".addslashes(format_string($PAGE->heading))."'
+                        }";
+                }
+            }
         } else {
             $template->addition = "'pageview'";
-        }
-        if (get_config('local_analytics', 'anonymizeip')) {
-            $template->anonymizeip = true;
         }
         if (self::should_track() && !empty($template->analyticsid)) {
             // The templates only contains a "{js}" block; so we don't care about

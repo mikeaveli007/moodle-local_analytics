@@ -60,6 +60,10 @@ class guniversal extends analytics {
             $template->useua = true;
             $template->usega4 = false;
         }
+        else {
+            $template->useua = false;
+            $template->usega4 = false;
+        }
 
         if($USER->id > 0) {
             $template->userid = $userid;

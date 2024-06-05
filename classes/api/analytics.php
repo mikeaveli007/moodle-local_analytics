@@ -110,16 +110,24 @@ abstract class analytics {
         }
 
         // If in the library add the entry category or name
-        if(isset($_REQUEST["eid"]) || isset($_REQUEST["mode"])) {
+        if(isset($_REQUEST["eid"]) || isset($_REQUEST["mode"]) || isset($_REQUEST["rid"])) {
+            // If request is in a glossary activity and in category mode, add the category to the url
             if(isset($_REQUEST["mode"]) && $_REQUEST["mode"] == "cat") { 
                 $category = get_entry_category($_REQUEST["hook"]);
                 $trackurl .= '/category/';
                 $trackurl .= self::might_encode($category->name, $urlencode);
             }
+            // If request is in a glossary activity and viewing single entry, add the entry title
             if(isset($_REQUEST["eid"])) {
                 $entry = get_entry($_REQUEST["eid"]);
                 $trackurl .= '/entry/';
                 $trackurl .= self::might_encode($entry->concept, $urlencode);
+            }
+            // If request is in a database activity and viewing single entry, add the entry title
+            if(isset($_REQUEST["rid"])) {
+                $entry = get_20_entry($_REQUEST["rid"]);
+                $trackurl .= '/entry/';
+                $trackurl .= self::might_encode($entry->content, $urlencode);
             }
         }
 

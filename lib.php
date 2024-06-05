@@ -58,6 +58,12 @@ function get_entry_category($id) {
     return $cat;
 }
 
+function get_20_entry($recordid) {
+    global $DB;
+    $entry = $DB->get_record('data_content', ['recordid' => $recordid, 'fieldid' => 1]);
+    return $entry;
+}
+
 function get_user_cohort_name($id) {
     global $DB;
 

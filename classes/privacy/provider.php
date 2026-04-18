@@ -23,8 +23,6 @@
 
 namespace local_analytics\privacy;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Privacy Subsystem implementation for local_analytics.
  * @copyright  2018 Olivier SECRET <olivier.secret@catalyst-au.net>
@@ -44,7 +42,7 @@ class provider implements
      *
      * @return  string
      */
-    public static function _get_reason() {
+    public static function get_reason(): string {
         return 'privacy:no_data_reason';
     }
 }

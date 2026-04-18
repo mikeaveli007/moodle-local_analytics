@@ -28,8 +28,6 @@
 
 namespace local_analytics\api;
 
-defined('MOODLE_INTERNAL') || die();
-
 use core\session\manager;
 
 /**

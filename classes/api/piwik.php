@@ -32,8 +32,6 @@ use local_analytics\dimensions;
 
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Piwik analytics class.
  * @copyright  Bas Brands, Sonsbeekmedia 2017

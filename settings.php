@@ -67,12 +67,27 @@ if (is_siteadmin()) {
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $settings->add($setting);
 
+    $name = 'local_analytics/gtag';
+    $title = get_string('gtag', 'local_analytics');
+    $description = get_string('gtagdesc', 'local_analytics');
+    $default = '1';
+    $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
+    $settings->add($setting);
+
+    $name = 'local_analytics/gtagtrackingid';
+    $title = get_string('gtagtrackingid', 'local_analytics');
+    $description = get_string('gtagtrackingid_desc', 'local_analytics');
+    $default = '';
+    $setting = new admin_setting_configtext($name, $title, $description, $default);
+    $settings->add($setting);
+
     $name = 'local_analytics/trackuser';
     $title = get_string('trackuser', 'local_analytics');
     $description = get_string('trackuser_desc', 'local_analytics');
     $default = false;
     $setting = new admin_setting_configcheckbox($name, $title, $description, $default, true, false);
     $settings->add($setting);
+
 
     $name = 'local_analytics/piwik';
     $title = get_string('piwik', 'local_analytics');

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<libraries>
+  <library>
+    <location>templates/gtag.mustache</location>
+    <name>Google Analytics 4 Tag</name>
+    <description>Google Analytics 4 Tag JS</description>
+    <customised/>
+  </library>
+  <library>
+    <location>templates/guniversal.mustache</location>
+    <name>Google Universal</name>
+    <description>Google Universal Tag JS</description>
+    <customised/>
+  </library>
+   <library>
+    <location>templates/piwik.mustache</location>
+    <name>Piwik</name>
+    <description>Piwik JS</description>
+    <customised/>
+  </library>
+</libraries>

@@ -28,24 +28,6 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-use local_analytics\injector;
-
-/**
- * Output callback, available since Moodle 3.3
- *
- */
-function local_analytics_before_footer() {
-    injector::inject();
-}
-
-/**
- * Output callback, available since Moodle 3.3
- *
- */
-function local_analytics_before_http_headers() {
-    injector::inject();
-}
-
 function get_entry($id) {
     global $DB;
     $entry = $DB->get_record('glossary_entries', ['id' => $id]);
@@ -67,29 +49,28 @@ function get_20_entry($recordid) {
 function get_user_cohort_name($id) {
     global $DB;
 
-    // Lookup service area crowd group
+    // Lookup service area crowd group.
     $cohort = $DB->get_field_sql('SELECT c.name
         FROM {cohort} c
         JOIN {cohort_members} cm ON c.id = cm.cohortid
-        WHERE cm.userid=? 
-        AND c.name LIKE ?', array($id, "ochin-crowd-sa%")
+        WHERE cm.userid = ?
+        AND c.name LIKE ?', [$id, 'ochin-crowd-sa%']
     );
 
-    // Return group if there is a service area crowd group
-    if($cohort) return $cohort;
+    if ($cohort) {
+        return $cohort;
+    }
 
-    // Otherwise check to see if there is a staff crowd group and return that
+    // Fall back to staff crowd group.
     return $DB->get_field_sql('SELECT c.name
         FROM {cohort} c
         JOIN {cohort_members} cm ON c.id = cm.cohortid
-        WHERE cm.userid=? 
-        AND c.name LIKE ?', array($id, "ochin-crowd-staff%")
+        WHERE cm.userid = ?
+        AND c.name LIKE ?', [$id, 'ochin-crowd-staff%']
     );
 }
 
 function get_user_service_area($id) {
     $cohort = get_user_cohort_name($id);
-    
-    $sa = $cohort != null ? explode("-", $cohort)[2]: null;
-    return $sa;
+    return $cohort !== null ? explode('-', $cohort)[2] : null;
 }

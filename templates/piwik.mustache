@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template local_analytics/guniversal
+    @template local_analytics/piwik
 
     Template for adding the Google Universal Tracking script.
 
@@ -26,21 +26,30 @@
     * none
 
     Context variables required for this template:
-    * siteid The Google tracking code
-    * addition Page tracking info added by this plugin
+    * siteid - The Piwik site ID
+    * siteurl - The Piwik site URL
+    * userid - The current user's ID
+    * doctitle - The current page's title
+    * imagetrack - Whether to use the image tracking code
 
     Example context (json):
-    { "siteid": UA-90210-15, "addition": 2, }
+    {
+        "siteid": 1,
+        "siteurl": "example.com",
+        "userid": 1,
+        "doctitle": "Example Page Title",
+        "imagetrack": true
+    }
 }}
 <!-- Start Piwik Code -->
 {{#imagetrack}}
-<noscript>
-<p>
-  <img src="//{{{siteurl}}}/piwik.php?idsite={{{siteid}}}" style="border:0;" alt="" />
-</p>
-</noscript>
+    <noscript>
+        <p>
+          <img src="//{{{siteurl}}}/piwik.php?idsite={{{siteid}}}" style="border:0;" alt="" />
+        </p>
+    </noscript>
 {{/imagetrack}}
-<script type="text/javascript">
+{{#js}}
 window._paq = window._paq || [];
 {{{doctitle}}}
 {{#userid}}
@@ -56,5 +65,5 @@ _paq.push(['enableHeartBeatTimer', 30]);
   var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
 g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
 })();
-</script>
+{{/js}}
 <!-- End Piwik Code -->

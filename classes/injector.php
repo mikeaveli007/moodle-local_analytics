@@ -25,8 +25,6 @@
 
 namespace local_analytics;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Class injector
  *
@@ -58,7 +56,7 @@ class injector {
             return;
         }
 
-        $analyticstypes = array('guniversal', 'piwik');
+        $analyticstypes = array('guniversal', 'piwik', 'gtag');
         foreach ($analyticstypes as $type) {
             $enabled = get_config('local_analytics', $type);
             if ($enabled) {

@@ -28,8 +28,8 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version  = 2022062202;
-$plugin->requires = 2017051500;
-$plugin->release = '1.8.0 (Build: 2022062202)';
+$plugin->version  = 2024070200;
+$plugin->requires = 2024042200; // Moodle 4.4
+$plugin->release = '1.8 (Build: 2024070200)';
 $plugin->maturity = MATURITY_STABLE;
 $plugin->component = 'local_analytics';

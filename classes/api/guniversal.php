@@ -30,8 +30,6 @@ namespace local_analytics\api;
 
 use stdClass;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Guniversal analytics class.
  * @copyright  Bas Brands, Sonsbeekmedia 2017
@@ -49,68 +47,35 @@ class guniversal extends analytics {
         $template = new stdClass();
 
         $template->analyticsid = get_config('local_analytics', 'analyticsid');
-        $template->analyticsgtmid = get_config('local_analytics', 'analyticsgtmid');
-        $userid = $USER->id;
+        $cleanurl = get_config('local_analytics', 'cleanurl');
 
-        if(substr($template->analyticsid, 0, 1) == "G") {
-            $template->usega4 = true;
-            $template->useua = false;
-        }
-        else if (substr($template->analyticsid, 0, 1) == "U") {
-            $template->useua = true;
-            $template->usega4 = false;
-        }
-        else {
-            $template->useua = false;
-            $template->usega4 = false;
-        }
-
-        if($USER->id > 0) {
-            $template->userid = $userid;
+        if ($USER->id > 0) {
+            $template->userid = $USER->id;
             $template->trackuser = get_config('local_analytics', 'trackuser');
-            $sa = get_user_service_area($USER->id);
-            $template->usersa = $sa;
+            $template->usersa = \get_user_service_area($USER->id);
         }
 
         if (get_config('local_analytics', 'anonymizeip')) {
             $template->anonymizeip = true;
-            $anonymizeip = "true";
-        } else {
-            $anonymizeip = "false";
         }
-        
-        $cleanurl = get_config('local_analytics', 'cleanurl');
 
         if ($cleanurl) {
             $trackurl = self::trackurl(true, true);
-            if($template->usega4) {
-                $template->ga4options = "{
-                    ".($trackurl ? "'page_path' : '".$trackurl."'," : '')."
-                    'page_title' : '".addslashes(format_string($PAGE->heading))."',
-                    'SA' : '".$sa."',
-                    'content_group' : '".$sa."',
-                    ".($template->trackuser ? "'user_id' : '".$template->userid."'," : '')."
-                    'anonymize_ip': ".$anonymizeip."
+            if ($trackurl) {
+                $template->addition = "{'hitType' : 'pageview',
+                    'page' : '" . $trackurl . "',
+                    'title' : '" . addslashes(format_string($PAGE->heading)) . "'
                     }";
-            }
-            else if ($template->useua) {
-                if($trackurl) {
-                    $template->addition = "{'hitType' : 'pageview',
-                        'page' : '".self::trackurl(true, true)."',
-                        'title' : '".addslashes(format_string($PAGE->heading))."'
-                        }";
-                } else {
-                    $template->addition = "{'hitType' : 'pageview',
-                        'title' : '".addslashes(format_string($PAGE->heading))."'
-                        }";
-                }
+            } else {
+                $template->addition = "{'hitType' : 'pageview',
+                    'title' : '" . addslashes(format_string($PAGE->heading)) . "'
+                    }";
             }
         } else {
             $template->addition = "'pageview'";
         }
+
         if (self::should_track() && !empty($template->analyticsid)) {
-            // The templates only contains a "{js}" block; so we don't care about
-            // the output; only that the $PAGE->requires are filled.
             $OUTPUT->render_from_template('local_analytics/guniversal', $template);
         }
     }
